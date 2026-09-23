@@ -16,7 +16,7 @@ printf "\n\n| ~~~~~~~~ Verilator venv ~~~~~~~~~ |\n"
 	source .venv/bin/activate
 
 printf "\n\n| ~~~~~~~~~~~ Testing ~~~~~~~~~~~ |\n"
-	make test UVM_HOME=$UVM_HOME
+	make test UVM_HOME=$UVM_HOME SEED=42
 
 printf "\n\n| ~~~~~~~~~~~ linting ~~~~~~~~~~~ |\n"
 	make lint UVM_HOME=$UVM_HOME
