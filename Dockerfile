@@ -20,16 +20,27 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 	libjemalloc-dev \
 	numactl \
 	perl-doc \
-	libfl2 \
-	libfl-dev \
-	zlibc \
-	zlib1g \
-	zlib1g-dev \
-	liblz4 \
-	liblz4-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN git clone --depth 1 --branch v${VERILATOR_VERSION} \
+# ~~~~ optional installs ~~~~
+RUN apt-get update && for package in \
+        libfl2 \
+        libfl-dev \
+        zlibc \
+        zlib1g \
+        zlib1g-dev \
+        liblz4-1 \
+        liblz4-dev \
+    ; do \
+        if apt-get install -y --no-install-recommends "$package"; then \
+            echo "Installed optional package: $package"; \
+        else \
+            echo "WARNING: Could not install optional package: $package" >&2; \
+        fi; \
+    done \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN git clone --depth 1 --branch v${VERILATOR_REF} \
       https://github.com/verilator/verilator.git /tmp/verilator \
     && cd /tmp/verilator \
     && autoconf \
