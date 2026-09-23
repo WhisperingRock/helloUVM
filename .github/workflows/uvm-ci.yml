@@ -16,7 +16,8 @@ jobs:
         run: docker build \
             --build-arg VERILATOR_REF=stable \
             --build-arg UVM_REF=1800.2-2017-1.0 \
-            -t uvm-ci:latest \ 
+            -t uvm-ci:latest \
+            .
 
       - name: Run UVM smoke test
         run: |
