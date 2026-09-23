@@ -1,26 +1,18 @@
+## Current Flow
 
-|- Factory
-|
-|- config_db
-|
-|- uvm_test_1
-    |
-    |- uvm_env
+GitHub repository
         |
-        |- uvm_scoreboard -->
+        ▼
+GitHub-hosted Ubuntu runner
         |
-        |- --> virtual sequencer -->
+        ▼
+Docker image containing:
+  - Verilator
+  - UVM library
+  - GCC/Clang
+  - Make
+  - Python utilities
         |
-        |- --> uvm_agent <-->
-        |   |
-        |   |- uvm_sequencer -->
-        |   |
-        |   |- uvm_driver --> (DUT)
-        |   |
-        |   |- (DUT) --> uvm_monitor
-        |
-        |- <--> DUT
- 
+        ▼
+Compile and run UVM tests
 
-
-Run a local Docker container with this...
