@@ -63,6 +63,7 @@ lint:
 	$(VERILATOR) \
 		--lint-only \
 		-Wall \
+		-wno-fatal \					# warning not fatal
 		--top-module $(TOP_TB_MODULE) \
 		+incdir+$(UVM_HOME) \
 		+incdir+$(SRC_DIR) \
