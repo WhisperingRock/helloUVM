@@ -40,7 +40,7 @@ RUN apt-get update && for package in \
     done \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone --depth 1 --branch v${VERILATOR_REF} \
+RUN git clone --depth 1 --branch ${VERILATOR_REF} \
       https://github.com/verilator/verilator.git /tmp/verilator \
     && cd /tmp/verilator \
     && autoconf \
