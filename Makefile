@@ -1,10 +1,5 @@
 SHELL := /usr/bin/env bash
 
-# Note : `make test TEST=another_test SEED=42` for indiv tests
-# Note : `make test UVM_HOME=/your/local/uvm/path/1800.2-2017-1.0/src` 
-
-# Tools and paths can be overridden:
-# make UVM_HOME=/opt/uvm test
 VERILATOR ?= verilator
 UVM_HOME ?= $(CURDIR)/../1800.2-2017-1.0/src
 
@@ -32,7 +27,8 @@ VERILATOR_FLAGS := \
 	+incdir+$(UVM_HOME) \
 	+incdir+$(SRC_DIR) \
 	+incdir+$(TEST_DIR) \
-	+define+UVM_NO_DPI
+	+define+UVM_NO_DPI \
+	--trace-vcd
 
 SOURCES := \
 	$(UVM_FILES) \
