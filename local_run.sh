@@ -9,22 +9,21 @@ SRC_DIR="00_rtl"
 TEST_DIR="01_tb"
 TOP_TB_MODULE="tbench_top"
 UVM_TESTNAME="dut_model_test"
+WAVEFILE="testwave.vcd"
 
 printf "\n\n| ~~~~~~~~ Verilator venv ~~~~~~~~~ |\n"
 	python3 -m venv .venv
 	source .venv/bin/activate
 
-printf "\n\n| ~~~~~~~~~~~ build sim ~~~~~~~~~~~ |\n"
-	verilator -Wno-fatal --binary -j $(nproc) \
-		--top-module $TOP_TB_MODULE	\
-		+incdir+$UVM_HOME 			\
-		+incdir+$VERILATOR_HOME		\
-		+incdir+$SRC_DIR			\
-		+incdir+$TEST_DIR			\
-	   	+define+UVM_NO_DPI 			\
-		$UVM_HOME/uvm_pkg.sv 		\
-		./$TEST_DIR/dut_pkg.sv		\
-		./$TEST_DIR/tb.sv
+printf "\n\n| ~~~~~~~~~~~ Testing ~~~~~~~~~~~ |\n"
+	make test UVM_HOME=$UVM_HOME
 
-printf "\n\n| ~~~~~~~~~~~ exec sim ~~~~~~~~~~~ |\n"
-	./obj_dir/V$TOP_TB_MODULE +$UVM_TESTNAME
+printf "\n\n| ~~~~~~~~~~~ linting ~~~~~~~~~~~ |\n"
+	make lint UVM_HOME=$UVM_HOME
+	
+printf "\n\n| ~~~~~~~~~~~ waveform ~~~~~~~~~~~ |\n"
+	gtkwave $WAVEFILE
+
+printf "\n\n| ~~~~~~~~~~~ clean up and exit~~~~~~~~~~~ |\n"
+	make clean
+	#rm $WAVEFILE
