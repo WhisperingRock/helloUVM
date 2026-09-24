@@ -2,10 +2,10 @@
 
 GitHub repository
         |
-        ▼
+        V
 GitHub-hosted Ubuntu runner
         |
-        ▼
+        V
 Docker image containing:
   - Verilator
   - UVM library
@@ -13,6 +13,6 @@ Docker image containing:
   - Make
   - Python utilities
         |
-        ▼
+        V
 Compile and run UVM tests
 

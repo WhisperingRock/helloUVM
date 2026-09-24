@@ -17,7 +17,9 @@ class dut_model_test extends uvm_test;
 	// Note : instantiate (and overwrite) our env using factory method 'create' ~~
 	// Note : its recommended to use factory methods to overwrite phases
 	function void build_phase(uvm_phase phase);
+
 		m_env = dut_model_env::type_id::create("m_env", this);
+
 	endfunction
 
 	// ~~ Run Phase (second) ~~
@@ -28,7 +30,7 @@ class dut_model_test extends uvm_test;
 		phase.raise_objection(this);
 
 		// ~ testing ~
-		#10; 
+		#80; 
 		`uvm_info("", "Hello World", UVM_MEDIUM)
 
 		// ~ let tb know we're done testing ~
